@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.parallax {
+  background: rgb(128, 128, 128);
+  background: radial-gradient(
+    circle,
+    rgba(128, 128, 128, 1) 0%,
+    rgba(241, 241, 241, 1) 98%
+  );
+  font-family: "Open Sans", sans;
+  overflow: hidden;
+}
+
+.parallax-cards {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 150px;
+}
+
+.parallax-cards-item-title {
+  position: absolute;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 0 10px;
+  position: absolute;
+  z-index: 2;
+  top: 80%;
+  left: 10%;
+  transform: translateZ(80px) scale(1.1);
+  transform-style: preserve-3d;
+  overflow-wrap: break-word;
+  pointer-events: none;
+}
+
+.parallax-cards-item-image {
+  position: absolute;
+  top: -54px;
+  left: -49px;
+  width: 150%;
+  height: 130%;
+  transform-origin: 50% 50%;
+  transform: translateZ(-50px) scale(1.6);
+}
+
+.parallax-cards-item-image-back {
+  transform: rotateX(180deg);
+}
+
+.parallax-cards-item {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  border-radius: 10px;
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 5.3px 10.6px 10.6px hsl(0deg 0% 0% / 0.34);
+}
+
+.parallax-cards-item-card-back {
+  opacity: 0;
+  transition: transform 0.5s;
+}
+
+.parallax-cards-item-rotate {
+  transform: rotateX(180deg);
+}
