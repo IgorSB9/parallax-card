@@ -10,7 +10,7 @@ cards.forEach((el) => {
   const cardBack = el.querySelector(".parallax-cards-item-card-back");
 
   el.onmousemove = transformPanel;
-  // el.onmouseleave = handleMouseLeave;
+  el.onmouseleave = handleMouseLeave;
 
   let mouseX, mouseY;
 
@@ -98,16 +98,16 @@ cards.forEach((el) => {
 
   el.onclick = () => flipCard();
 
-  // function handleMouseLeave() {
-  //   setTimeout(() => {
-  //     el.style.transition = "transform 0.3s";
-  //     el.style.transform = "translate(0px,0px)";
-  //   }, 1500);
+  function handleMouseLeave() {
+    setTimeout(() => {
+      el.style.transition = "transform 0.3s";
+      el.style.transform = "translate(0px,0px)";
+    }, 1500);
 
-  //   setTimeout(() => {
-  //     el.style.transition = "transform 0s";
-  //   }, 1600);
+    setTimeout(() => {
+      el.style.transition = "transform 0s";
+    }, 1600);
 
-  //   el.style.transition = "transform 0s";
-  // }
+    el.style.transition = "transform 0s";
+  }
 });
