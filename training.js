@@ -15,41 +15,23 @@ class Card {
     mouseX = e.layerX;
     mouseY = e.layerY;
 
-    console.log(this.childNodes[3].childNodes[1].style.transform);
-
     const centerX = this.clientWidth / 2;
     const centerY = this.clientHeight / 2;
     const percentX = ((mouseX - centerX) * 5) / (this.clientWidth / 8);
     const percentY = -(((mouseY - centerY) * 5) / (this.clientHeight / 8));
 
     if (this.classList.contains("parallax-cards-item-rotate")) {
-      // this.childNodes[1].childNodes[1].style.transform =
-      //   "perspective(800px) rotateY(" +
-      //   percentX +
-      //   "deg) rotateX(" +
-      //   (percentY + 180) +
-      //   "deg)";
+      this.childNodes[3].childNodes[1].style.transform = `perspective(800px) translateY(${percentX}px) translateX(${percentY}px) rotateX(180deg)`;
 
-      this.style.transform =
-        "perspective(800px) rotateY(" +
-        percentX +
-        "deg) rotateX(" +
-        (percentY + 180) +
-        "deg)";
+      this.style.transform = `perspective(800px) rotateY(
+        ${percentX}deg) rotateX(
+        ${percentY + 180}deg)`;
     } else {
-      // this.childNodes[3].childNodes[1].style.transform =
-      //   "perspective(800px) rotateY(" +
-      //   percentX +
-      //   "deg) rotateX(" +
-      //   percentY +
-      //   "deg)";
+      this.childNodes[1].childNodes[1].style.transform = `perspective(800px) translateY(${percentX}px) translateX(${percentY}px)`;
 
-      this.style.transform =
-        "perspective(800px) rotateY(" +
-        percentX +
-        "deg) rotateX(" +
-        percentY +
-        "deg)";
+      this.style.transform = `perspective(800px) rotateY(
+          ${percentX}deg) rotateX(
+          ${percentY}deg`;
     }
   }
 
@@ -64,41 +46,34 @@ class Card {
     if (this.item.classList.contains("parallax-cards-item-rotate")) {
       setTimeout(() => {
         this.title.style.opacity = "0";
-        this.titleBack.style.transform = "rotateX(180deg)";
-        this.titleBack.style.top = "45px";
+        this.titleBack.style = "transform : rotateX(180deg); top : 45px";
       }, timeout);
 
       setTimeout(() => {
-        this.item.style.pointerEvents = "auto";
-        this.item.style.transition = "transform 0s";
+        this.item.style = "pointer-events: auto; transition: transform 0s;";
       }, 500);
 
-      this.item.style.transform = "rotateX(180deg)";
-      this.item.style.transition = "transform 0.5s";
-      this.item.style.pointerEvents = "none";
+      this.item.style =
+        "transform: rotateX(180deg); transition: transform 0.5s; pointer-events: none";
     } else {
       setTimeout(() => {
         this.title.style.opacity = "1";
-        this.titleBack.style.transform = "rotateX(180deg)";
-        this.titleBack.style.top = "45px";
+        this.titleBack.style = "transform: rotateX(180deg); top: 45px";
       }, timeout);
 
       setTimeout(() => {
-        this.item.style.pointerEvents = "auto";
-        this.item.style.transition = "transform 0s";
+        this.item.style = "pointer-events: auto; transition: transform 0s";
       }, 500);
 
-      this.item.style.transform = "rotateX(0deg)";
-      this.item.style.transition = "transform 0.5s";
-      this.item.style.pointerEvents = "none";
+      this.item.style =
+        "transform: rotateX(0deg); transition: transform 0.5s; pointer-events: none";
     }
   }
 
   handleMouseLeave() {
-    console.log(this);
     setTimeout(() => {
-      this.item.style.transition = "transform 0.3s";
-      this.item.style.transform = "translate(0px,0px)";
+      this.item.style =
+        "transition: transform 0.3s; transform: translate(0px,0px)";
     }, 1500);
 
     setTimeout(() => {
@@ -121,5 +96,5 @@ cards.forEach((el) => {
 
   el.onclick = () => card.flipCard();
   el.onmousemove = card.transformPanel;
-  el.onmouseleave = card.handleMouseLeave();
+  el.onmouseleave = card.handleMouseLeave;
 });
