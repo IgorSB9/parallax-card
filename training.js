@@ -11,6 +11,7 @@ cards.forEach((el) => {
 
   el.onmousemove = transformPanel;
   el.onmouseleave = handleMouseLeave;
+  el.ommouseenter = handleMouseEnter;
 
   let mouseX, mouseY;
 
@@ -26,33 +27,17 @@ cards.forEach((el) => {
     const percentY = -(((mouseY - centerY) * 5) / (el.clientHeight / 8));
 
     if (el.classList.contains("parallax-cards-item-rotate")) {
-      imageBack.style.transform =
-        "perspective(800px) rotateY(" +
-        percentX +
-        "deg) rotateX(" +
-        (percentY + 180) +
-        "deg)";
+      imageBack.style.transform = `perspective(800px) translateY(${percentX}px) translateX(${percentY}px) rotateX(180deg)`;
 
-      el.style.transform =
-        "perspective(800px) rotateY(" +
-        percentX +
-        "deg) rotateX(" +
-        (percentY + 180) +
-        "deg)";
+      el.style.transform = `perspective(800px) rotateY(
+        ${percentX}deg) rotateX(
+        ${percentY + 180}deg)`;
     } else {
-      image.style.transform =
-        "perspective(800px) rotateY(" +
-        percentX +
-        "deg) rotateX(" +
-        percentY +
-        "deg)";
+      image.style.transform = `perspective(800px) translateY(${percentX}px) translateX(${percentY}px)`;
 
-      el.style.transform =
-        "perspective(800px) rotateY(" +
-        percentX +
-        "deg) rotateX(" +
-        percentY +
-        "deg)";
+      el.style.transform = `perspective(800px) rotateY(
+        ${percentX}deg) rotateX(
+        ${percentY}deg`;
     }
   }
 
@@ -66,48 +51,53 @@ cards.forEach((el) => {
     if (el.classList.contains("parallax-cards-item-rotate")) {
       setTimeout(() => {
         title.style.opacity = "0";
-        titleBack.style.transform = "rotateX(180deg)";
-        titleBack.style.top = "45px";
+        titleBack.style = "transform : rotateX(180deg); top : 45px";
       }, timeout);
 
       setTimeout(() => {
-        el.style.pointerEvents = "auto";
-        el.style.transition = "transform 0s";
+        el.style = "pointer-events: auto; transition: transform 0s;";
       }, 500);
 
-      el.style.transform = "rotateX(180deg)";
-      el.style.transition = "transform 0.5s";
-      el.style.pointerEvents = "none";
+      el.style =
+        "transform: rotateX(180deg); transition: transform 0.5s; pointer-events: none;";
     } else {
       setTimeout(() => {
         title.style.opacity = "1";
-        titleBack.style.transform = "rotateX(180deg)";
-        titleBack.style.top = "45px";
+        titleBack.style = "transform: rotateX(180deg); top: 45px";
       }, timeout);
 
       setTimeout(() => {
-        el.style.pointerEvents = "auto";
-        el.style.transition = "transform 0s";
+        el.style = "pointer-events: auto; transition: transform 0s";
       }, 500);
 
-      el.style.transform = "rotateX(0deg)";
-      el.style.transition = "transform 0.5s";
-      el.style.pointerEvents = "none";
+      el.style =
+        "transform: rotateX(0deg); transition: transform 0.5s; pointer-events: none;";
     }
   }
 
   el.onclick = () => flipCard();
 
   function handleMouseLeave() {
-    setTimeout(() => {
-      el.style.transition = "transform 0.3s";
-      el.style.transform = "translate(0px,0px)";
-    }, 1500);
+    if (el.classList.contains("parallax-cards-item-rotate")) {
+      setTimeout(() => {
+        el.style =
+          "transition: transform 0.3s; transform: translate(0px,0px) rotateX(180deg)";
+      }, 1500);
+    } else {
+      setTimeout(() => {
+        el.style = "transition: transform 0.3s; transform: translate(0px,0px)";
+      }, 1500);
+    }
 
     setTimeout(() => {
       el.style.transition = "transform 0s";
     }, 1600);
+  }
 
-    el.style.transition = "transform 0s";
+  function handleMouseEnter(e) {
+    setTimeout(() => {
+      el.style.transition = "";
+    }, 200);
+    el.style.transition = "transform 0.2s";
   }
 });
