@@ -71,16 +71,28 @@ class Card {
   }
 
   handleMouseLeave() {
-    setTimeout(() => {
-      this.item.style =
-        "transition: transform 0.3s; transform: translate(0px,0px)";
-    }, 1500);
+    if (this.classList.contains("parallax-cards-item-rotate")) {
+      setTimeout(() => {
+        this.style =
+          "transition: transform 0.3s; transform: translate(0px,0px) rotateX(180deg)";
+      }, 1500);
+    } else {
+      setTimeout(() => {
+        this.style =
+          "transition: transform 0.3s; transform: translate(0px,0px)";
+      }, 1500);
+    }
 
     setTimeout(() => {
-      this.item.style.transition = "transform 0s";
+      this.style.transition = "transform 0s";
     }, 1600);
+  }
 
-    this.item.style.transition = "transform 0s";
+  handleMouseEnter() {
+    setTimeout(() => {
+      this.style.transition = "";
+    }, 200);
+    this.style.transition = "transform 0.2s";
   }
 }
 
@@ -97,4 +109,5 @@ cards.forEach((el) => {
   el.onclick = () => card.flipCard();
   el.onmousemove = card.transformPanel;
   el.onmouseleave = card.handleMouseLeave;
+  el.onmouseenter = card.handleMouseEnter;
 });
