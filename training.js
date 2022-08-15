@@ -20,18 +20,21 @@ class Card {
     const percentX = ((mouseX - centerX) * 5) / (this.clientWidth / 8);
     const percentY = -(((mouseY - centerY) * 5) / (this.clientHeight / 8));
 
+    const translateX = -((mouseX - centerX) * 7) / (this.clientWidth / 4);
+    const translateY = -((mouseY - centerY) * 7) / (this.clientHeight / 4);
+
     if (this.classList.contains("parallax-cards-item-rotate")) {
-      this.childNodes[3].childNodes[1].style.transform = `perspective(800px) translateY(${percentX}px) translateX(${percentY}px) rotateX(180deg)`;
+      this.childNodes[3].childNodes[1].style.transform = `perspective(800px) translateY(${-translateY}px) translateX(${translateX}px) rotateX(180deg)`;
 
       this.style.transform = `perspective(800px) rotateY(
         ${percentX}deg) rotateX(
         ${percentY + 180}deg)`;
     } else {
-      this.childNodes[1].childNodes[1].style.transform = `perspective(800px) translateY(${percentX}px) translateX(${percentY}px)`;
+      this.childNodes[1].childNodes[1].style.transform = `perspective(800px) translateY(${translateY}px) translateX(${translateX}px) `;
 
       this.style.transform = `perspective(800px) rotateY(
           ${percentX}deg) rotateX(
-          ${percentY}deg`;
+          ${percentY}deg)`;
     }
   }
 
@@ -92,7 +95,7 @@ class Card {
     setTimeout(() => {
       this.style.transition = "";
     }, 200);
-    this.style.transition = "transform 0.2s";
+    this.style.transition = "transform 0.3s";
   }
 }
 
